@@ -1,6 +1,6 @@
 package com.worldmanager.platform.kpi.controllers;
 
-import com.worldmanager.platform.kpi.models.Greeting;
+import com.worldmanager.platform.kpi.data.models.Greeting;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

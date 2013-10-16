@@ -1,4 +1,4 @@
-package com.worldmanager.platform.kpi.models;
+package com.worldmanager.platform.kpi.data.models;
 
 public class Greeting {
     private final long id;
