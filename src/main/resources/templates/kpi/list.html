@@ -30,14 +30,15 @@
         <td>N/A</td>
         <td>N/A</td>
         <td>N/A</td>
+        <td>N/A</td>
         <td th:text="${#lists.size(item.sections)}">4</td>
         <td><a href="#" th:href="@{/kpi/template/activate(id=${item.id})}" th:text="${item.isActive} ? 'Yes': 'No'">Active</a></td>
         <td><a href="#" th:href="@{/kpi/template/copy(id=${item.id})}">Copy</a></td>
         <td><a href="#" th:href="@{/kpi/template/edit(id=${item.id})}">Edit</a></td>
         <td><a href="#" th:href="@{/kpi/template/delete(id=${item.id})}">Delete</a></td>
     </tr>
-    <tr th:if="${template}" th:each="section: ${sections}"   th:attr="data-item-id=${template.id}">
-        <td colspan="6">
+    <tr th:if="${template.id eq item.id}" th:each="section: ${sections}"   th:attr="data-item-id=${template.id}">
+        <td colspan="7">
             <a href="#" th:href="@{/kpi/item/list(id=${section.id})}" th:text="${section.name}">Name</a>
         </td>
         <td><a href="#" th:href="@{/kpi/item/copy(id=${section.id})}">Copy</a></td>
