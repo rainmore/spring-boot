@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="message success" th:if="${success}" th:text="${success}"></div>
+<a href="/kpi/template/list">Back to List</a>
+<dl>
+    <dt>Id</dt>
+    <dd th:text="${template.id}"></dd>
+    <dt>Template</dt>
+    <dd th:text="${template.name}"></dd>
+    <dt>Description</dt>
+    <dd th:text="${template.description}"></dd>
+    <dt>Sections</dt>
+    <dd>
+        <ol>
+            <li th:each="section: ${sections}">
+                <dl>
+                    <dt>Id</dt>
+                    <dd th:text="${section.id}">id</dd>
+                    <dt>Section</dt>
+                    <dd th:text="${section.name}">Name</dd>
+                    <dt>Position</dt>
+                    <dd th:text="${section.position}">Position</dd>
+                </dl>
+            </li>
+        </ol>
+
+    </dd>
+</dl>
+</body>
+</html>

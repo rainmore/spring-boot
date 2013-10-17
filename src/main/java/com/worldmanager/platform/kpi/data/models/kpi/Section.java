@@ -2,16 +2,16 @@ package com.worldmanager.platform.kpi.data.models.kpi;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "kpiSection")
+//@Entity
+//@Table(name = "kpiSection")
 public class Section {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "templateId")
+//    @ManyToOne
+//    @JoinColumn(name = "templateId")
     private Template template;
 
     private String name;

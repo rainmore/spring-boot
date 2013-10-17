@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'application'
+apply plugin: 'scala'
 
 buildscript {
     repositories {
@@ -31,6 +32,10 @@ dependencies {
     }
     compile("org.springframework.boot:spring-boot-starter-jetty:${bootVersion}")
     compile("org.springframework.boot:spring-boot-starter-actuator:${bootVersion}")
+    compile("org.springframework.scala:spring-scala:1.0.0.M2")
+
+    compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'org.hibernate:hibernate-validator:5.0.1.Final'
 
     // security
 //    compile("org.springframework.boot:spring-boot-starter-security:${bootVersion}")

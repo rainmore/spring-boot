@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>KPI Template Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="message" th:if="${message}" th:text="${message}"></div>
+<a href="/kpi/template/list">Back to List</a>
+
+<form th:attr="action=@{/kpi/template/save(id=${template.id})}" th:object="${template}" method="POST">
+    <ul th:if="${#fields.hasErrors('*')}">
+        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+    </ul>
+
+    <dl>
+        <dt>Name</dt>
+        <dd>
+            <!--<input type="text" name="name" value="Name" th:value="${template.name}" />-->
+            <input type="text" th:field="${template.name}" />
+            <ul th:if="${#fields.hasErrors('name')}">
+                <li th:each="err : ${#fields.errors('name')}" th:text="${err}">Input is incorrect</li>
+            </ul>
+        </dd>
+        <dt>Description</dt>
+        <dd><textarea th:field="${template.description}">Description</textarea></dd>
+        <dt>Status</dt>
+        <dd><label th:for="${#ids.next('isActive')}"><input type="checkbox" th:field="${template.isActive}" th:checked="${template.isActive}" /></label></dd>
+        <dt></dt>
+        <dd>
+            <input type="submit" />
+            <input type="reset" />
+        </dd>
+    </dl>
+</form>
+</body>
+</html>
+

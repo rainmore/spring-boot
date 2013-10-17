@@ -7,9 +7,11 @@ import com.typesafe.config.ConfigFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -26,7 +28,7 @@ import java.util.Arrays;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-@EnableJpaRepositories
+//@EnableJpaRepositories
 public class Application {
 
     public static void main(String[] args) {
@@ -42,42 +44,49 @@ public class Application {
     }
 
     @Bean
-    public Config applicationConfig() {
-        return ConfigFactory.load();
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("messages");
+        return messageSource;
     }
-
-    @Bean
-    public DataSource dataSource() {
-        Config config = applicationConfig();
-        Config dbConfig = config.getConfig("default").getConfig("db");
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(dbConfig.getString("driver"));
-        dataSource.setUrl(String.format("jdbc:mysql://%s:3306/%s", dbConfig.getString("host"), dbConfig.getString("name")));
-        dataSource.setUsername(dbConfig.getString("user"));
-        dataSource.setPassword(dbConfig.getString("pass"));
-        return dataSource;
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
-        LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
-        lef.setDataSource(dataSource);
-        lef.setJpaVendorAdapter(jpaVendorAdapter);
-        lef.setPackagesToScan("com.worldmanager.platform.kpi.data");
-        return lef;
-    }
-
-    @Bean
-    public JpaVendorAdapter jpaVendorAdapter() {
-        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-        hibernateJpaVendorAdapter.setShowSql(false);
-        hibernateJpaVendorAdapter.setGenerateDdl(true);
-        hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
-        return hibernateJpaVendorAdapter;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new JpaTransactionManager();
-    }
+//
+//    @Bean
+//    public Config applicationConfig() {
+//        return ConfigFactory.load();
+//    }
+//
+//    @Bean
+//    public DataSource dataSource() {
+//        Config config = applicationConfig();
+//        Config dbConfig = config.getConfig("default").getConfig("db");
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(dbConfig.getString("driver"));
+//        dataSource.setUrl(String.format("jdbc:mysql://%s:3306/%s", dbConfig.getString("host"), dbConfig.getString("name")));
+//        dataSource.setUsername(dbConfig.getString("user"));
+//        dataSource.setPassword(dbConfig.getString("pass"));
+//        return dataSource;
+//    }
+//
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+//        LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
+//        lef.setDataSource(dataSource);
+//        lef.setJpaVendorAdapter(jpaVendorAdapter);
+//        lef.setPackagesToScan("com.worldmanager.platform.kpi.data");
+//        return lef;
+//    }
+//
+//    @Bean
+//    public JpaVendorAdapter jpaVendorAdapter() {
+//        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+//        hibernateJpaVendorAdapter.setShowSql(false);
+//        hibernateJpaVendorAdapter.setGenerateDdl(true);
+//        hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+//        return hibernateJpaVendorAdapter;
+//    }
+//
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        return new JpaTransactionManager();
+//    }
 }

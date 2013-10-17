@@ -5,10 +5,46 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-
-<dl>
-    <dt></dt>
-    <dd></dd>
-</dl>
+<div class="message" th:if="${message}" th:text="${message}"></div>
+<table>
+    <thead>
+    <tr>
+        <th rowspan="2">Template</th>
+        <th colspan="3">Target</th>
+        <th rowspan="2">Type</th>
+        <th rowspan="2">KRA</th>
+        <th rowspan="2">Active</th>
+        <th rowspan="2">Copy</th>
+        <th rowspan="2">Edit</th>
+        <th rowspan="2">Delete</th>
+    </tr>
+    <tr>
+        <th>Location</th>
+        <th>Group</th>
+        <th>Account</th>
+    </tr>
+    </thead>
+    <tbody th:each="item: ${list}" >
+    <tr th:attr="data-item-id=${item.id}">
+        <td><a href="#" th:href="@{/kpi/template/list(id=${item.id})}" th:text="${item.name}">Name</a></td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td th:text="${#lists.size(item.sections)}">4</td>
+        <td><a href="#" th:href="@{/kpi/template/activate(id=${item.id})}" th:text="${item.isActive} ? 'Yes': 'No'">Active</a></td>
+        <td><a href="#" th:href="@{/kpi/template/copy(id=${item.id})}">Copy</a></td>
+        <td><a href="#" th:href="@{/kpi/template/edit(id=${item.id})}">Edit</a></td>
+        <td><a href="#" th:href="@{/kpi/template/delete(id=${item.id})}">Delete</a></td>
+    </tr>
+    <tr th:if="${template}" th:each="section: ${sections}"   th:attr="data-item-id=${template.id}">
+        <td colspan="6">
+            <a href="#" th:href="@{/kpi/item/list(id=${section.id})}" th:text="${section.name}">Name</a>
+        </td>
+        <td><a href="#" th:href="@{/kpi/item/copy(id=${section.id})}">Copy</a></td>
+        <td><a href="#" th:href="@{/kpi/item/edit(id=${section.id})}">Edit</a></td>
+        <td><a href="#" th:href="@{/kpi/item/delete(id=${section.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
